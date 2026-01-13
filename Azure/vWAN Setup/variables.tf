@@ -1,7 +1,7 @@
 variable "subscription_id" {
   description = "Azure Subscription ID"
   type        = string
-  default     = "
+  default     = ""
 }
 
 variable "resource_group_name" {
@@ -19,7 +19,7 @@ variable "location" {
 variable "vwan_name" {
   description = "Name of the VWAN"
   type        = string
-  default     = "dglading-vwan"
+  default     = "dglading-vWan"
 }
 
 variable "vwan_hub_name" {
@@ -35,19 +35,19 @@ variable "vwan_hub_address_prefix" {
 }
 
 variable "vnets" {
-  description = "Map of virtual networks, each with a map of name, cidr, and next hop bypass flag"
+  description = "Map of virtual networks, each with a map of name and cidr"
   type = map(object({
-    vnet_name                  = string
-    subnet_name                = string
-    vnet_cidr                  = string
-    subnet_cidr                = string
+    vnet_name   = string
+    subnet_name = string
+    vnet_cidr   = string
+    subnet_cidr = string
   }))
   default = {
     spoke1 = {
-      vnet_name                  = "dglading-spoke1-vnet"
-      subnet_name                = "dglading-spoke1-subnet"
-      vnet_cidr                  = "10.3.0.0/20"
-      subnet_cidr                = "10.3.1.0/24"
+      vnet_name   = "dglading-spoke1-vnet"
+      subnet_name = "dglading-spoke1-subnet"
+      vnet_cidr   = "10.3.0.0/20"
+      subnet_cidr = "10.3.1.0/24"
     }
     spoke2 = {
       vnet_name   = "dglading-spoke2-vnet"
@@ -60,7 +60,6 @@ variable "vnets" {
       subnet_name = "dglading-zscaler-subnet"
       vnet_cidr   = "10.5.0.0/20"
       subnet_cidr = "10.5.1.0/24"
-      bypass_next_hop_ip_enabled = true      # Set true ONLY for this VNet
     }
   }
 }
